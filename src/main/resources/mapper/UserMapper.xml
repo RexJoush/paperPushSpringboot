@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joush.mapper.UserMapper">
+    <insert id="register">
+        INSERT INTO user (`name`, `username`, `password`, `status`)
+        VALUES (#{name}, #{username}, #{password}, #{status})
+    </insert>
+    <update id="updateTarget">
+        UPDATE user
+        SET target = #{target}
+        WHERE username = #{username};
+    </update>
+    <update id="updateDeadline">
+        UPDATE user
+        SET deadline = #{deadline}
+        WHERE username = #{username};
+    </update>
+
+    <select id="checkLogin" resultType="com.joush.entities.User">
+        SELECT *
+        FROM user
+        where username = #{username}
+          and password = #{password}
+          and status = #{status};
+    </select>
+    <select id="getUserByUsername" resultType="com.joush.entities.User">
+        SELECT *
+        FROM user
+        where username = #{username}
+    </select>
+    <select id="getDeadlineAndTarget" resultType="com.joush.entities.display.Progress">
+        SELECT deadline, target
+        FROM user
+        where username = #{username}
+    </select>
+
+</mapper>

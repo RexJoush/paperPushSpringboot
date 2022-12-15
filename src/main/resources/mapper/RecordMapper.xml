@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joush.mapper.RecordMapper">
+    <update id="edit">
+        UPDATE record
+        SET words = #{words}
+        WHERE id = #{id};
+    </update>
+
+    <delete id="del">
+        DELETE
+        FROM record
+        WHERE id = #{id}
+    </delete>
+
+    <select id="listRecordsByUserName" resultType="com.joush.entities.Record">
+        SELECT *
+        FROM record
+        WHERE username = #{username}
+        ORDER BY `date`
+    </select>
+
+    <select id="list" resultType="com.joush.entities.Record">
+        SELECT *
+        FROM record
+        WHERE username = #{username}
+        ORDER BY `date` DESC
+        LIMIT #{pageStart}, #{pageSize}
+    </select>
+
+    <select id="getRecordByDate" resultType="com.joush.entities.Record">
+        SELECT *
+        FROM record
+        WHERE username = #{username}
+          AND `date` = #{date}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id)
+        FROM record
+        WHERE username = #{username}
+    </select>
+    <select id="listRecordNoPage" resultType="com.joush.entities.Record">
+        SELECT r.*,
+               u.name
+        FROM record r
+                 LEFT JOIN user u ON r.username = u.username
+        ORDER BY date
+    </select>
+
+    <insert id="add">
+        INSERT INTO record (`username`, `words`, `date`)
+        VALUES (#{username}, #{words}, #{date})
+    </insert>
+</mapper>
