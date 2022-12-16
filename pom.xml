@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.joush</groupId>
     <artifactId>paperPushSpringboot</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <name>paperPushSpringboot</name>
     <description>paperPushSpringboot</description>
     <properties>
